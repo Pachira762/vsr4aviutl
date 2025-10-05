@@ -1,6 +1,6 @@
 # vsr4aviutl
-## 概要
-RTX Video Super Resolution を使用したアップスケーラー兼デノイザーです。  
+RTX VSRを使用したアップスケーラー兼デノイザーです。
+[ここ](https://github.com/Pachira762/vsr4aviutl/releases/latest)からダウンロードできます。
 
 ## 前提
 RTX 3000 以上のGPUが必要です。  
