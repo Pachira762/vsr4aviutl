@@ -1,6 +1,9 @@
 # vsr4aviutl
 
-RTX Video Super Resolution を使用したデノイズ、アップスケーリングを行うプラグイン
+RTX Video Super Resolution を使用したデノイズ、アップスケーリングを行うプラグインです。  
+
+**単体のファイルをアップスケーリングする場合NVEncの--vpp-resize ngx-vsrオプションを使用する方がよいかもしれません。**
+
 
 ## 前提
 
