@@ -6,6 +6,8 @@
 #pragma comment(lib, "cudart_static.lib")
 #pragma comment(lib, "nvsdk_ngx_s.lib")
 
+constexpr int MAX_RESOLUTION = 16384;
+
 static FILTER_ITEM_SELECT::ITEM g_quality_list[] = {
 	{ L"バイキュービック", NVSDK_NGX_VSR_Quality_Bicubic },
 	{ L"低", NVSDK_NGX_VSR_Quality_Low },
@@ -38,12 +40,17 @@ bool proc_video(FILTER_PROC_VIDEO* video) {
 
 	int src_width = video->object->width;
 	int src_height = video->object->height;
-	in_buff.resize(src_width * src_height);
-	video->get_image_data(in_buff.data());
-
 	double scale = g_scale.value;
 	int target_width = scale * src_width;
 	int target_height = scale * src_height;
+
+	if (std::max(target_width, target_height) > MAX_RESOLUTION) {
+		output_warn(L"最大解像度を超過しました");
+		return false;
+	}
+
+	in_buff.resize(src_width * src_height);
+	video->get_image_data(in_buff.data());
 	out_buff.resize(target_width * target_height);
 
 	UpscaleInputs inputs{};
